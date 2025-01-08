@@ -1482,6 +1482,129 @@ public class Main {
 
         }
 
+
+// Bubble Sort
+public class BubbleSort {
+    public static void main(String[] args) {
+        int[] arr = {5, 3, 8, 6, 2};
+        bubbleSort(arr);
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
     }
 
+    public static void bubbleSort(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
 }
+
+// Merge Sort:
+public class MergeSort {
+    public static void main(String[] args) {
+        int[] arr = {5, 3, 8, 6, 2};
+        mergeSort(arr, 0, arr.length - 1);
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    public static void merge(int[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        int[] leftArr = new int[n1];
+        int[] rightArr = new int[n2];
+
+        for (int i = 0; i < n1; i++) leftArr[i] = arr[left + i];
+        for (int j = 0; j < n2; j++) rightArr[j] = arr[mid + 1 + j];
+
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            if (leftArr[i] <= rightArr[j]) {
+                arr[k++] = leftArr[i++];
+            } else {
+                arr[k++] = rightArr[j++];
+            }
+        }
+
+        while (i < n1) arr[k++] = leftArr[i++];
+        while (j < n2) arr[k++] = rightArr[j++];
+    }
+}
+
+// Linked List Insertion and Deletion
+class LinkedList {
+    Node head;
+
+    static class Node {
+        int data;
+        Node next;
+        Node(int data) { this.data = data; this.next = null; }
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node temp = head;
+            while (temp.next != null) temp = temp.next;
+            temp.next = newNode;
+        }
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+
+    public void delete(int key) {
+    if (head == null) return;
+
+    if (head.data == key) {
+        head = head.next;
+        return;
+    }
+
+    Node temp = head;
+    while (temp.next != null && temp.next.data != key) {
+        temp = temp.next;
+    }
+
+    if (temp.next != null) {
+        temp.next = temp.next.next;
+    }
+}
+
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.insert(10);
+        list.insert(20);
+        list.insert(30);
+        list.display(); // Output: 10 20 30
+    }
+}
+
